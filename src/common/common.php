@@ -88,18 +88,21 @@ function connectWithGooglePhotos(array $scopes, $redirectURI)
         'authorizationUri' => 'https://accounts.google.com/o/oauth2/v2/auth',
         // Where to return the user to if they accept your request to access their account.
         // You must authorize this URI in the Google API Console.
-        'redirectUri' => $redirectURI,
+        'redirectUri' => 'https://php-photoslibrary.ikefukuro40.tech/src/albums/views/album.php',
+        // 'redirectUri' => 'https://challenge.ikefukuro40.tech/j28_callback.php',
         'tokenCredentialUri' => 'https://www.googleapis.com/oauth2/v4/token',
         'scope' => $scopes,
     ]);
 
+    //4/0AVHEtk6XyOP850Tb006ArlC4NG8gqdYJmrkvUzVEZnmipns-HXWDw5r6UWnFJnNQyTV4Ow
     // The authorization URI will, upon redirecting, return a parameter called code.
     if (!isset($_GET['code'])) {
         $authenticationUrl = $oauth2->buildFullAuthorizationUri(['access_type' => 'offline']);
         header("Location: " . $authenticationUrl);
     } else {
         // With the code returned by the OAuth flow, we can retrieve the refresh token.
-        $oauth2->setCode($_GET['code']);
+        // $oauth2->setCode($_GET['code']);
+        $oauth2->setCode('4/0AVHEtk6XyOP850Tb006ArlC4NG8gqdYJmrkvUzVEZnmipns-HXWDw5r6UWnFJnNQyTV4Ow');
         $authToken = $oauth2->fetchAuthToken();
         $refreshToken = $authToken['access_token'];
 
